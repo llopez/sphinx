@@ -1,23 +1,21 @@
 import React from 'react'
-import {
-  Typography,
-  Card,
-  CardContent,
-} from '@material-ui/core'
-
-import AccountsList from './dashboard/accounts/List'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Layout from './Layout'
+import Dashboard from './Dashboard'
+import Market from './Market'
+import Settings from './Settings'
 
 const App = () => (
-  <Layout>
-    <Card>
-      <CardContent>
-        <Typography>Portfolio</Typography>
-        <Typography variant="h5">$ 40,000.21</Typography>
-      </CardContent>
-    </Card>
-    <AccountsList />
-  </Layout>
+  <Router>
+    <Layout>
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route path="/market" component={Market} />
+        <Route path="/settings" component={Settings} />
+      </Switch>
+    </Layout>
+  </Router>
 )
 
 export default App

@@ -1,17 +1,13 @@
 import React from 'react'
 import {
   Grid,
-  BottomNavigation,
-  BottomNavigationAction,
   Typography,
   CssBaseline,
   AppBar,
   Toolbar,
 } from '@material-ui/core'
 
-import EqualizerIcon from '@material-ui/icons/Equalizer';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
-import SettingsIcon from '@material-ui/icons/Settings';
+import Navigation from './Navigation'
 
 const Layout = ({ children }) => (
   <Grid container direction="column">
@@ -26,13 +22,7 @@ const Layout = ({ children }) => (
       {children}
     </Grid>
     <Grid item>
-      <BottomNavigation
-        showLabels
-      >
-        <BottomNavigationAction label="Dashboard" icon={<EqualizerIcon />} />
-        <BottomNavigationAction label="Market" icon={<ShowChartIcon />} />
-        <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
-      </BottomNavigation>
+      <Navigation />
     </Grid>
     <CssBaseline />
   </Grid >

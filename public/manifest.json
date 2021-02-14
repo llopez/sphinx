@@ -14,9 +14,9 @@
     }
   ],
   "start_url": "/",
-  "background_color": "##fafafa",
+  "background_color": "#fafafa",
   "display": "fullscreen",
   "scope": "/",
-  "theme_color": "##fafafa",
+  "theme_color": "#fafafa",
   "description": "Cryptocurrency Portfolio Tracking"
 }
