@@ -10,8 +10,8 @@ const AccountsList = () => {
     <List>
       {
         accounts.map(account => (
-          <React.Fragment>
-            <Account account={account} key={account.address} />
+          <React.Fragment key={account.address}>
+            <Account account={account} />
             <Divider />
           </React.Fragment>
         ))
