@@ -2,13 +2,19 @@
 <html>
   <head>
     <title>Sphinx</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="manifest" href="/manifest.json">
+    
+    <link rel="apple-touch-icon" href="/assets/pwa/apple-icon-180.png">
+    <link rel="apple-touch-startup-image" href="/assets/pwa/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="//unpkg.com/prevent-pull-refresh"></script>
     <%= javascript_pack_tag 'index' %>
   </head>
 

@@ -13,8 +13,8 @@ import AvatarGroup from "@material-ui/lab/AvatarGroup";
 const Token = () => {
   return (
     <AvatarGroup>
-      <Avatar src="dai.png" style={{ width: 30, height: 30 }} />
-      <Avatar src="usdc.png" style={{ width: 30, height: 30 }} />
+      <Avatar src="/assets/dai.png" style={{ width: 30, height: 30 }} />
+      <Avatar src="/assets/usdc.png" style={{ width: 30, height: 30 }} />
     </AvatarGroup>
   );
 };
