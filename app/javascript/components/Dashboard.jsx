@@ -5,7 +5,7 @@ import {
   CardContent,
 } from '@material-ui/core'
 
-import AccountsList from './dashboard/accounts/List'
+import AccountsList from './dashboard/AccountsList'
 
 const Dashboard = () => {
   return (

@@ -2,12 +2,14 @@ import React from "react";
 
 import {
   ListItem,
-  ListItemAvatar,
   ListItemText,
   ListItemSecondaryAction,
   Typography,
   Avatar
 } from "@material-ui/core";
+
+import ArrowIcon from '@material-ui/icons/NavigateNext'
+
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 
 const Token = () => {
@@ -24,7 +26,8 @@ const Account = () => {
     <ListItem button>
       <ListItemText primary="Ledger 1" secondary={<Token />} />
       <ListItemSecondaryAction>
-        <Typography>$ 2550</Typography>
+        <div style={{ textAlign: 'right' }}><ArrowIcon viewBox="0 0 10 24" /></div>
+        <Typography component="div">$ 2,550.00</Typography>
       </ListItemSecondaryAction>
     </ListItem>
   );
