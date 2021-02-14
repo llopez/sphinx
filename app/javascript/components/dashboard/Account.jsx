@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   ListItem,
   ListItemText,
@@ -7,27 +6,27 @@ import {
   Typography,
   Avatar
 } from "@material-ui/core";
-
 import ArrowIcon from '@material-ui/icons/NavigateNext'
-
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 
-const Token = () => {
-  return (
-    <AvatarGroup>
-      <Avatar src="/assets/dai.png" style={{ width: 30, height: 30 }} />
-      <Avatar src="/assets/usdc.png" style={{ width: 30, height: 30 }} />
-    </AvatarGroup>
-  );
-};
+const Account = (props) => {
+  const { account } = props
+  const { label, total, erc20s } = account;
 
-const Account = () => {
+  const erc20sList = (
+    <AvatarGroup>
+      {
+        erc20s.map(({ symbol }) => <Avatar key={symbol} src={`/assets/${symbol}.png`} style={{ width: 30, height: 30 }} />)
+      }
+    </AvatarGroup>
+  )
+
   return (
     <ListItem button>
-      <ListItemText primary="Ledger 1" secondary={<Token />} />
+      <ListItemText primary={label} secondary={erc20sList} />
       <ListItemSecondaryAction>
         <div style={{ textAlign: 'right' }}><ArrowIcon viewBox="0 0 10 24" /></div>
-        <Typography component="div">$ 2,550.00</Typography>
+        <Typography component="div">$ {total}</Typography>
       </ListItemSecondaryAction>
     </ListItem>
   );

@@ -18,5 +18,6 @@
   "display": "fullscreen",
   "scope": "/",
   "theme_color": "#fafafa",
-  "description": "Cryptocurrency Portfolio Tracking"
+  "description": "Cryptocurrency Portfolio Tracking",
+  "orientation": "portrait"
 }
