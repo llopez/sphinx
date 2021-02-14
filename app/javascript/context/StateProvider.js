@@ -34,6 +34,11 @@ const initialState = {
         { symbol: 'dai', balance: 1000 },
       ]
     }
+  ],
+  tokens: [
+    { symbol: 'dai', value: 1.0 },
+    { symbol: 'usdc', value: 1.0 },
+    { symbol: 'bat', value: 0.23 },
   ]
 }
 

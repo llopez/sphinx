@@ -1,4 +1,5 @@
 import accounts from './accounts'
+import tokens from './tokens'
 
 export const combineReducers = reducer => {
   return (state = {}, action) => {
@@ -14,4 +15,5 @@ export const combineReducers = reducer => {
 
 export default combineReducers({
   accounts,
+  tokens,
 })
