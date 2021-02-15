@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Grid,
   Typography,
-  CssBaseline,
   AppBar,
   Toolbar,
 } from '@material-ui/core'
@@ -10,11 +9,11 @@ import {
 import Navigation from './Navigation'
 
 const Layout = ({ children }) => (
-  <Grid container direction="column">
+  <Grid container direction="column" style={{ backgroundColor: '#fafafa' }}>
     <Grid item>
-      <AppBar position="static" color="inherit" style={{ borderBottom: '1px solid #ccc', boxShadow: 'none' }}>
-        <Toolbar>
-          <Typography variant="h6">Sphinx</Typography>
+      <AppBar position="static" color="inherit" style={{ borderBottom: '1px solid #ccc', boxShadow: 'none', backgroundColor: '#3f51b5' }}>
+        <Toolbar style={{ justifyContent: 'center' }}>
+          <Typography variant="h6" style={{ color: 'white', letterSpacing: '1em', paddingLeft: '1em' }}>SPHINX</Typography>
         </Toolbar>
       </AppBar>
     </Grid>
@@ -24,7 +23,6 @@ const Layout = ({ children }) => (
     <Grid item>
       <Navigation />
     </Grid>
-    <CssBaseline />
   </Grid >
 )
 

@@ -15,10 +15,12 @@
  */
 
 body {
-  position: fixed;
-  width: 100%;
+  /* position: fixed;
+  width: 100%; */
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  margin: 0;
+  background-color: #3f51b5;
 }
