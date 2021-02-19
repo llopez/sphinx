@@ -1,0 +1,27 @@
+var CACHE_NAME = 'v1-cached-assets'
+
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(function prefill(cache) {
+      return cache.addAll([
+        '<%= asset_path "application.css" %>',
+        '<%= asset_pack_path "application.js" %>',
+        '<%= asset_path "dai.png" %>',
+        '<%= asset_path "usdc.png" %>',
+        '<%= asset_path "bat.png" %>',
+        '<%= asset_path "eth.png" %>',
+        '<%= asset_path "ethrsiapy.png" %>',
+        '<%= asset_path "uni.png" %>',
+        '<%= asset_path "wbtc.png" %>',
+      ]);
+    })
+  );
+});
+
+self.addEventListener('activate', e => {
+  console.log('service worker has been activated erb');
+});
+
+self.addEventListener('fetch', e => {
+  console.log(e);
+});
