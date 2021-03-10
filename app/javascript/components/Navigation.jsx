@@ -9,12 +9,18 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
 import SettingsIcon from '@material-ui/icons/Settings';
 
+const routes = {
+  dashboard: '/',
+  market: 'market',
+  settings: 'settings',
+}
+
 const Navigation = () => {
   const history = useHistory();
   const [value, setValue] = useState('dashboard')
 
   useEffect(() => {
-    history.push(value)
+    history.push(routes[value])
   }, [value])
 
   return (

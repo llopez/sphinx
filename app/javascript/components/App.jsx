@@ -12,7 +12,6 @@ const App = () => (
       <Layout>
         <Switch>
           <Route exact path="/" component={Dashboard} />
-          <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/market" component={Market} />
           <Route path="/settings" component={Settings} />
         </Switch>

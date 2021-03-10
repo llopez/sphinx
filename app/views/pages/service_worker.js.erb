@@ -1,9 +1,10 @@
-var CACHE_NAME = 'v1-cached-assets'
+var CACHE_NAME = 'cached-assets-v1'
 
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME).then(function prefill(cache) {
       return cache.addAll([
+        '/',
         '<%= asset_path "application.css" %>',
         '<%= asset_pack_path "application.js" %>',
         '<%= asset_path "dai.png" %>',
@@ -13,15 +14,52 @@ self.addEventListener('install', e => {
         '<%= asset_path "ethrsiapy.png" %>',
         '<%= asset_path "uni.png" %>',
         '<%= asset_path "wbtc.png" %>',
+        '<%= asset_path "favicon.ico" %>'
       ]);
     })
   );
 });
 
 self.addEventListener('activate', e => {
-  console.log('service worker has been activated erb');
+  console.log('activate', 'cleaning caches');
+
+  e.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames
+          .filter(key => key !== CACHE_NAME)
+          .map(cacheName => {
+            return caches.delete(cacheName);
+          })
+      );
+    })
+  ); 
 });
 
 self.addEventListener('fetch', e => {
-  console.log(e);
+  e.respondWith(
+    caches.match(e.request)
+      .then(cachedResponse => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        return fetch(e.request).then(fechedResponse => {
+            if(!fechedResponse || fechedResponse.status !== 200 || fechedResponse.type !== 'basic') {
+              return fechedResponse;
+            }
+
+            var responseToCache = fechedResponse.clone()
+
+            caches.open(CACHE_NAME)
+              .then(function(cache) {
+                cache.put(e.request, responseToCache);
+              });
+
+            return fechedResponse;
+          }
+        );
+      }
+    )
+  );
 });
