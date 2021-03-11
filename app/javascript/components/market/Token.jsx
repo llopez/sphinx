@@ -6,6 +6,24 @@ import {
   Typography, ListItemAvatar, Avatar
 } from "@material-ui/core";
 
+import usdcImage from 'images/usdc.png'
+import batImage from 'images/bat.png'
+import ethImage from 'images/eth.png'
+import uniImage from 'images/uni.png'
+import daiImage from 'images/dai.png'
+import ethrsiapyImage from 'images/ethrsiapy.png'
+import wbtcImage from 'images/wbtc.png'
+
+const tokenImage = {
+  usdc: usdcImage,
+  bat: batImage,
+  eth: ethImage,
+  uni: uniImage,
+  dai: daiImage,
+  ethrsiapy: ethrsiapyImage,
+  wbtc: wbtcImage,
+}
+
 const Token = (props) => {
   const { token } = props
   const { symbol, value } = token;
@@ -13,7 +31,7 @@ const Token = (props) => {
   return (
     <ListItem>
       <ListItemAvatar>
-        <Avatar src={`/assets/${symbol}.png`} />
+        <Avatar src={tokenImage[symbol]} />
       </ListItemAvatar>
       <ListItemText primary={symbol} style={{ textTransform: 'uppercase' }} />
       <ListItemSecondaryAction>

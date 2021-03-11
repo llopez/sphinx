@@ -9,6 +9,24 @@ import {
 import ArrowIcon from '@material-ui/icons/NavigateNext'
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 
+import usdcImage from 'images/usdc.png'
+import batImage from 'images/bat.png'
+import ethImage from 'images/eth.png'
+import uniImage from 'images/uni.png'
+import daiImage from 'images/dai.png'
+import ethrsiapyImage from 'images/ethrsiapy.png'
+import wbtcImage from 'images/wbtc.png'
+
+const tokenImage = {
+  usdc: usdcImage,
+  bat: batImage,
+  eth: ethImage,
+  uni: uniImage,
+  dai: daiImage,
+  ethrsiapy: ethrsiapyImage,
+  wbtc: wbtcImage,
+}
+
 const Account = (props) => {
   const { account } = props
   const { label, total, erc20s } = account;
@@ -16,7 +34,7 @@ const Account = (props) => {
   const erc20sList = (
     <AvatarGroup>
       {
-        erc20s.map(({ symbol }) => <Avatar key={symbol} src={`/assets/${symbol}.png`} style={{ width: 30, height: 30 }} />)
+        erc20s.map(({ symbol }) => <Avatar key={symbol} src={tokenImage[symbol]} style={{ width: 30, height: 30 }} />)
       }
     </AvatarGroup>
   )
