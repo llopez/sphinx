@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   get '/service-worker.js' => 'pages#service_worker'
+  get '/manifest.json' => 'pages#manifest'
 
   get '*path' => 'pages#index', via: :all
 end

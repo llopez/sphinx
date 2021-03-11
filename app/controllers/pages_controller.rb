@@ -4,4 +4,8 @@ class PagesController < ApplicationController
   def service_worker
     render layout: false
   end
+
+  def manifest
+    render layout: false
+  end
 end
