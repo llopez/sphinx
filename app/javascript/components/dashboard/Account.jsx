@@ -16,6 +16,7 @@ import uniImage from 'images/uni.png'
 import daiImage from 'images/dai.png'
 import ethrsiapyImage from 'images/ethrsiapy.png'
 import wbtcImage from 'images/wbtc.png'
+import { useHistory } from "react-router-dom"
 
 const tokenImage = {
   usdc: usdcImage,
@@ -29,7 +30,9 @@ const tokenImage = {
 
 const Account = (props) => {
   const { account } = props
-  const { label, total, erc20s } = account;
+  const { label, total, erc20s, address } = account;
+
+  const history = useHistory()
 
   const erc20sList = (
     <AvatarGroup>
@@ -40,7 +43,7 @@ const Account = (props) => {
   )
 
   return (
-    <ListItem button>
+    <ListItem button onClick={() => { history.push(`accounts/${address}`) }}>
       <ListItemText primary={label} secondary={erc20sList} />
       <ListItemSecondaryAction>
         <div style={{ textAlign: 'right' }}><ArrowIcon viewBox="0 0 10 24" /></div>
