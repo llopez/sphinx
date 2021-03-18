@@ -53,8 +53,7 @@ const AccountView = () => {
           <List>
             {
               account.erc20s.map(asset => (
-
-                <ListItem dense divider style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <ListItem dense divider style={{ paddingLeft: 0, paddingRight: 0 }} key={asset.symbol}>
                   <ListItemAvatar>
                     <Avatar src={tokenImage[asset.symbol]} />
                   </ListItemAvatar>

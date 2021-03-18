@@ -44,7 +44,6 @@ const Account = (props) => {
 
   const total = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(account.total)
 
-
   return (
     <ListItem button onClick={() => { history.push(`accounts/${address}`) }}>
       <ListItemText primary={label} secondary={erc20sList} />
