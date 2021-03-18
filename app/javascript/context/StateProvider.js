@@ -72,6 +72,8 @@ const initialState = {
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
 
+  useEffect(() => { console.log(state) }, [state])
+
   return (
     <Context.Provider value={[state, dispatch]}>
       {children}
