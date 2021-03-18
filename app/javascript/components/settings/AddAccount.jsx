@@ -2,13 +2,24 @@ import React, { useContext, useState } from 'react'
 import { TextField, Typography, Button, Grid } from '@material-ui/core'
 import Context from '../../context/Context'
 import { addAccount } from '../../actions/accounts'
+import { getBalance, compressAddress } from '../../utils/blockchain'
 
 const AddAccount = () => {
   const [, dispatch] = useContext(Context)
   const [address, setAddress] = useState('')
 
-  const handleSubmit = () => {
-    dispatch(addAccount(address))
+  const handleSubmit = async () => {
+    const ether = await getBalance(address)
+
+    dispatch(
+      addAccount({
+        address,
+        ether,
+        label: compressAddress(address),
+        erc20s: [],
+        total: ether * 1700,
+      })
+    )
     setAddress('')
   }
 

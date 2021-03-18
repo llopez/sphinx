@@ -30,24 +30,27 @@ const tokenImage = {
 
 const Account = (props) => {
   const { account } = props
-  const { label, total, erc20s, address } = account;
+  const { label, erc20s, address } = account;
 
   const history = useHistory()
 
   const erc20sList = (
     <AvatarGroup>
       {
-        erc20s.map(({ symbol }) => <Avatar key={symbol} src={tokenImage[symbol]} style={{ width: 30, height: 30 }} />)
+        [{ symbol: 'eth' }, ...erc20s].map(({ symbol }) => <Avatar key={symbol} src={tokenImage[symbol]} style={{ width: 30, height: 30 }} />)
       }
     </AvatarGroup>
   )
+
+  const total = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(account.total)
+
 
   return (
     <ListItem button onClick={() => { history.push(`accounts/${address}`) }}>
       <ListItemText primary={label} secondary={erc20sList} />
       <ListItemSecondaryAction>
         <div style={{ textAlign: 'right' }}><ArrowIcon viewBox="0 0 10 24" /></div>
-        <Typography component="div">$ {total}</Typography>
+        <Typography component="div">{total}</Typography>
       </ListItemSecondaryAction>
     </ListItem>
   );
