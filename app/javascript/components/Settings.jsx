@@ -1,13 +1,31 @@
 import React from 'react'
 import {
-  Typography,
-} from '@material-ui/core'
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  ListItemAvatar
+} from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { useHistory } from "react-router-dom"
 
 const Settings = () => {
+  const history = useHistory()
+
   return (
     <React.Fragment>
-      <Typography>Settings</Typography>
-      <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sed assumenda corporis consequuntur nisi ut esse ex sint, reprehenderit delectus eaque doloribus cum labore pariatur, provident laboriosam explicabo. Doloribus, aspernatur?</Typography>
+      <List>
+        <ListItem button divider onClick={() => { history.push('/accounts/new') }}>
+          <ListItemAvatar>
+            <AddIcon />
+          </ListItemAvatar>
+          <ListItemText primary="Add Account" secondary="Add ethereum account by address" />
+          <ListItemSecondaryAction>
+            <NavigateNextIcon />
+          </ListItemSecondaryAction>
+        </ListItem>
+      </List>
     </React.Fragment>
   )
 }
