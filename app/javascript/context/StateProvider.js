@@ -8,6 +8,7 @@ const initialState = {
     { symbol: 'dai', value: 1.0 },
     { symbol: 'usdc', value: 1.0 },
     { symbol: 'bat', value: 0.23 },
+    { symbol: 'eth', value: 1800 },
   ]
 }
 

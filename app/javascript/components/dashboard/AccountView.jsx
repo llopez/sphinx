@@ -21,6 +21,8 @@ import daiImage from 'images/dai.png'
 import ethrsiapyImage from 'images/ethrsiapy.png'
 import wbtcImage from 'images/wbtc.png'
 
+import { formatCurrency } from '../../utils/formatting'
+
 const tokenImage = {
   usdc: usdcImage,
   bat: batImage,
@@ -32,18 +34,45 @@ const tokenImage = {
 }
 
 const AccountView = () => {
-  const [{ accounts }] = useContext(Context)
+  const [{ accounts, tokens }] = useContext(Context)
   const { address } = useParams()
 
   const account = accounts.find(acc => acc.address === address)
-  const total = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(account.total)
+
+  const getTokenPrice = (symbol) => tokens.find(token => token.symbol === symbol).value
+
+  const accountTotal = [
+    { symbol: 'eth', balance: account.ether },
+    ...account.erc20s
+  ]
+    .map(asset => asset.balance * getTokenPrice(asset.symbol))
+    .reduce((m, v) => m + v, 0)
+
+  const Asset = (props) => {
+    const { asset } = props
+    const { symbol, balance } = asset
+    const price = getTokenPrice(symbol)
+    const total = formatCurrency(balance * price)
+
+    return (
+      <ListItem dense divider style={{ paddingLeft: 0, paddingRight: 0 }}>
+        <ListItemAvatar>
+          <Avatar src={tokenImage[symbol]} />
+        </ListItemAvatar>
+        <ListItemText primary={symbol} secondary={balance} primaryTypographyProps={{ style: { textTransform: 'uppercase' } }} />
+        <ListItemSecondaryAction>
+          <Typography component="div">{total}</Typography>
+        </ListItemSecondaryAction>
+      </ListItem>
+    )
+  }
 
   return (
     <React.Fragment>
       <Card>
         <CardContent>
           <Typography>{account.label}</Typography>
-          <Typography variant="h5">{total}</Typography>
+          <Typography variant="h5">{formatCurrency(accountTotal)}</Typography>
         </CardContent>
       </Card>
 
@@ -52,17 +81,7 @@ const AccountView = () => {
           <Typography>Assets</Typography>
           <List>
             {
-              account.erc20s.map(asset => (
-                <ListItem dense divider style={{ paddingLeft: 0, paddingRight: 0 }} key={asset.symbol}>
-                  <ListItemAvatar>
-                    <Avatar src={tokenImage[asset.symbol]} />
-                  </ListItemAvatar>
-                  <ListItemText primary={asset.symbol} secondary={asset.balance} />
-                  <ListItemSecondaryAction>
-                    <Typography component="div">$1,000.00</Typography>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))
+              [{ symbol: 'eth', balance: account.ether }, ...account.erc20s].map(asset => <Asset asset={asset} key={asset.symbol} />)
             }
           </List>
         </CardContent>

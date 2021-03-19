@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ListItem,
   ListItemText,
@@ -17,6 +17,8 @@ import daiImage from 'images/dai.png'
 import ethrsiapyImage from 'images/ethrsiapy.png'
 import wbtcImage from 'images/wbtc.png'
 import { useHistory } from "react-router-dom"
+import Context from '../../context/Context'
+import { formatCurrency } from '../../utils/formatting'
 
 const tokenImage = {
   usdc: usdcImage,
@@ -30,8 +32,9 @@ const tokenImage = {
 
 const Account = (props) => {
   const { account } = props
-  const { label, erc20s, address } = account;
+  const { label, erc20s, address, ether } = account;
 
+  const [{ tokens }] = useContext(Context)
   const history = useHistory()
 
   const erc20sList = (
@@ -41,15 +44,21 @@ const Account = (props) => {
       }
     </AvatarGroup>
   )
+  const getTokenPrice = (symbol) => tokens.find(token => token.symbol === symbol).value
 
-  const total = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(account.total)
+  const total = [
+    { symbol: 'eth', balance: ether },
+    ...erc20s
+  ]
+    .map(asset => asset.balance * getTokenPrice(asset.symbol))
+    .reduce((m, v) => m + v, 0)
 
   return (
     <ListItem button onClick={() => { history.push(`accounts/${address}`) }}>
       <ListItemText primary={label} secondary={erc20sList} />
       <ListItemSecondaryAction>
         <div style={{ textAlign: 'right' }}><ArrowIcon viewBox="0 0 10 24" /></div>
-        <Typography component="div">{total}</Typography>
+        <Typography component="div">{formatCurrency(total)}</Typography>
       </ListItemSecondaryAction>
     </ListItem>
   );
