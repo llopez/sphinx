@@ -2,25 +2,35 @@ import React, { useContext, useState } from 'react'
 import { TextField, Typography, Button, Grid } from '@material-ui/core'
 import Context from '../../context/Context'
 import { addAccount } from '../../actions/accounts'
-import { getBalance, compressAddress } from '../../utils/blockchain'
+import { getEthBalance, getUsdcBalance, compressAddress, getDaiBalance } from '../../utils/blockchain'
 
 const AddAccount = () => {
   const [, dispatch] = useContext(Context)
   const [address, setAddress] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async () => {
-    const ether = await getBalance(address)
+    setLoading(true)
+    const ether = await getEthBalance(address)
+    const usdc = await getUsdcBalance(address)
+    const dai = await getDaiBalance(address)
+
+    const erc20s = [
+      { symbol: 'usdc', balance: parseFloat(usdc).toFixed(2) },
+      { symbol: 'dai', balance: parseFloat(dai).toFixed(2) },
+    ].filter(({ balance }) => balance > 0)
 
     dispatch(
       addAccount({
         address,
         ether,
         label: compressAddress(address),
-        erc20s: [],
+        erc20s,
         total: ether * 1700,
       })
     )
     setAddress('')
+    setLoading(false)
   }
 
   return (
@@ -47,6 +57,7 @@ const AddAccount = () => {
       </Grid>
       <Grid item style={{ textAlign: 'center', marginTop: '0.4em' }}>
         <Button
+          disabled={loading}
           variant="contained"
           disableElevation
           color="primary"

@@ -9,15 +9,6 @@ const getBalance = async (account) => {
   return ethers.utils.formatEther(res);
 };
 
-const compressAddress = (address) => {
-  return (
-    address.substring(0, 7) +
-    ".." +
-    address.substring(address.length - 7, address.length)
-  );
-};
-
 export {
-  getBalance,
-  compressAddress,
+  getBalance
 }
