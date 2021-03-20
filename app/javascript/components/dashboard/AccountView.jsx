@@ -22,6 +22,7 @@ import ethrsiapyImage from 'images/ethrsiapy.png'
 import wbtcImage from 'images/wbtc.png'
 
 import { formatCurrency } from '../../utils/formatting'
+import { calculateAccountTotal, getTokenPrice } from '../../utils/calcs'
 
 const tokenImage = {
   usdc: usdcImage,
@@ -39,19 +40,12 @@ const AccountView = () => {
 
   const account = accounts.find(acc => acc.address === address)
 
-  const getTokenPrice = (symbol) => tokens.find(token => token.symbol === symbol).value
-
-  const accountTotal = [
-    { symbol: 'eth', balance: account.ether },
-    ...account.erc20s
-  ]
-    .map(asset => asset.balance * getTokenPrice(asset.symbol))
-    .reduce((m, v) => m + v, 0)
+  const accountTotal = calculateAccountTotal(account, tokens)
 
   const Asset = (props) => {
     const { asset } = props
     const { symbol, balance } = asset
-    const price = getTokenPrice(symbol)
+    const price = getTokenPrice(symbol, tokens)
     const total = formatCurrency(balance * price)
 
     return (

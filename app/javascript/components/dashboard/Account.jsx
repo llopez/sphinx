@@ -19,6 +19,7 @@ import wbtcImage from 'images/wbtc.png'
 import { useHistory } from "react-router-dom"
 import Context from '../../context/Context'
 import { formatCurrency } from '../../utils/formatting'
+import { calculateAccountTotal } from '../../utils/calcs'
 
 const tokenImage = {
   usdc: usdcImage,
@@ -32,7 +33,7 @@ const tokenImage = {
 
 const Account = (props) => {
   const { account } = props
-  const { label, erc20s, address, ether } = account;
+  const { label, erc20s, address } = account;
 
   const [{ tokens }] = useContext(Context)
   const history = useHistory()
@@ -44,14 +45,8 @@ const Account = (props) => {
       }
     </AvatarGroup>
   )
-  const getTokenPrice = (symbol) => tokens.find(token => token.symbol === symbol).value
 
-  const total = [
-    { symbol: 'eth', balance: ether },
-    ...erc20s
-  ]
-    .map(asset => asset.balance * getTokenPrice(asset.symbol))
-    .reduce((m, v) => m + v, 0)
+  const total = calculateAccountTotal(account, tokens)
 
   return (
     <ListItem button onClick={() => { history.push(`accounts/${address}`) }}>

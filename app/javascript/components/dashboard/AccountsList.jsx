@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { List, Divider } from "@material-ui/core";
 import Account from "./Account";
-import Context from '../../context/Context'
 
-const AccountsList = () => {
-  const [{ accounts }] = useContext(Context)
+const AccountsList = (props) => {
+  const { accounts } = props;
 
   return (
     <List>
