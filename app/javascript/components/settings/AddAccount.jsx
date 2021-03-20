@@ -26,7 +26,6 @@ const AddAccount = () => {
         ether: parseFloat(ether).toFixed(4),
         label: compressAddress(address),
         erc20s,
-        // total: ether * 1700,
       })
     )
     setAddress('')

@@ -57,7 +57,7 @@ const AccountView = () => {
           <Avatar src={tokenImage[symbol]} />
         </ListItemAvatar>
         <ListItemText primary={symbol} secondary={balance} primaryTypographyProps={{ style: { textTransform: 'uppercase' } }} />
-        <ListItemSecondaryAction>
+        <ListItemSecondaryAction style={{ right: 0 }}>
           <Typography component="div">{total}</Typography>
         </ListItemSecondaryAction>
       </ListItem>

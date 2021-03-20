@@ -29,12 +29,12 @@ const Token = (props) => {
   const { symbol, value } = token;
 
   return (
-    <ListItem>
+    <ListItem style={{ paddingLeft: 0 }}>
       <ListItemAvatar>
         <Avatar src={tokenImage[symbol]} />
       </ListItemAvatar>
       <ListItemText primary={symbol} style={{ textTransform: 'uppercase' }} />
-      <ListItemSecondaryAction>
+      <ListItemSecondaryAction style={{ right: 0 }}>
         <Typography component="div">$ {value}</Typography>
       </ListItemSecondaryAction>
     </ListItem>

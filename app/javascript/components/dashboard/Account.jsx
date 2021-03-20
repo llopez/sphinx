@@ -49,9 +49,9 @@ const Account = (props) => {
   const total = calculateAccountTotal(account, tokens)
 
   return (
-    <ListItem button onClick={() => { history.push(`accounts/${address}`) }}>
+    <ListItem button onClick={() => { history.push(`accounts/${address}`) }} style={{ paddingLeft: 0 }}>
       <ListItemText primary={label} secondary={erc20sList} />
-      <ListItemSecondaryAction>
+      <ListItemSecondaryAction style={{ right: 0 }}>
         <div style={{ textAlign: 'right' }}><ArrowIcon viewBox="0 0 10 24" /></div>
         <Typography component="div">{formatCurrency(total)}</Typography>
       </ListItemSecondaryAction>
