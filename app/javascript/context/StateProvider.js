@@ -11,9 +11,20 @@ const initialState = {
     { symbol: 'eth', value: 1800 },
   ]
 }
+const STORAGE_NAME = 'sphinx-data'
+
+const withCache = reducer => {
+  return (state, action) => {
+    const newState = reducer(state, action);
+    localStorage.setItem(STORAGE_NAME, JSON.stringify(newState));
+    return newState;
+  }
+};
+
+const getStateFromCache = () => JSON.parse(localStorage.getItem(STORAGE_NAME)) || initialState;
 
 const StateProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(rootReducer, initialState);
+  const [state, dispatch] = useReducer(withCache(rootReducer), getStateFromCache());
 
   useEffect(() => { console.log(state) }, [state])
 
