@@ -9,10 +9,12 @@ const TokensList = () => {
   return (
     <List>
       {
-        tokens.map(token => (
+        tokens.map((token, idx) => (
           <React.Fragment key={token.symbol}>
             <Token token={token} />
-            <Divider />
+            {
+              idx + 1 !== tokens.length && <Divider />
+            }
           </React.Fragment>
         ))
       }

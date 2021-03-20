@@ -10,6 +10,7 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemSecondaryAction,
+  Divider,
 } from '@material-ui/core'
 import { useParams } from "react-router-dom"
 
@@ -42,6 +43,8 @@ const AccountView = () => {
 
   const accountTotal = calculateAccountTotal(account, tokens)
 
+  const assets = [{ symbol: 'eth', balance: account.ether }, ...account.erc20s]
+
   const Asset = (props) => {
     const { asset } = props
     const { symbol, balance } = asset
@@ -49,7 +52,7 @@ const AccountView = () => {
     const total = formatCurrency(balance * price)
 
     return (
-      <ListItem dense divider style={{ paddingLeft: 0, paddingRight: 0 }}>
+      <ListItem dense style={{ paddingLeft: 0, paddingRight: 0 }}>
         <ListItemAvatar>
           <Avatar src={tokenImage[symbol]} />
         </ListItemAvatar>
@@ -70,12 +73,19 @@ const AccountView = () => {
         </CardContent>
       </Card>
 
-      <Card style={{ marginTop: '1em' }}>
+      <Card style={{ marginTop: '0.5em' }}>
         <CardContent>
           <Typography>Assets</Typography>
           <List>
             {
-              [{ symbol: 'eth', balance: account.ether }, ...account.erc20s].map(asset => <Asset asset={asset} key={asset.symbol} />)
+              assets.map((asset, idx) => (
+                <React.Fragment>
+                  <Asset asset={asset} key={asset.symbol} />
+                  {
+                    idx + 1 !== assets.length && <Divider />
+                  }
+                </React.Fragment>
+              ))
             }
           </List>
         </CardContent>

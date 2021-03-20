@@ -8,10 +8,12 @@ const AccountsList = (props) => {
   return (
     <List>
       {
-        accounts.map(account => (
+        accounts.map((account, idx) => (
           <React.Fragment key={account.address}>
             <Account account={account} />
-            <Divider />
+            {
+              idx + 1 !== accounts.length && <Divider />
+            }
           </React.Fragment>
         ))
       }
