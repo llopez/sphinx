@@ -7,29 +7,12 @@ import {
   Avatar
 } from "@material-ui/core";
 import ArrowIcon from '@material-ui/icons/NavigateNext'
-import AvatarGroup from "@material-ui/lab/AvatarGroup";
-
-import usdcImage from 'images/usdc.png'
-import batImage from 'images/bat.png'
-import ethImage from 'images/eth.png'
-import uniImage from 'images/uni.png'
-import daiImage from 'images/dai.png'
-import ethrsiapyImage from 'images/ethrsiapy.png'
-import wbtcImage from 'images/wbtc.png'
+import AvatarGroup from "@material-ui/lab/AvatarGroup"
 import { useHistory } from "react-router-dom"
 import Context from '../../context/Context'
 import { formatCurrency } from '../../utils/formatting'
 import { calculateAccountTotal } from '../../utils/calcs'
-
-const tokenImage = {
-  usdc: usdcImage,
-  bat: batImage,
-  eth: ethImage,
-  uni: uniImage,
-  dai: daiImage,
-  ethrsiapy: ethrsiapyImage,
-  wbtc: wbtcImage,
-}
+import { assetImage } from '../../utils/images'
 
 const Account = (props) => {
   const { account } = props
@@ -41,7 +24,7 @@ const Account = (props) => {
   const erc20sList = (
     <AvatarGroup>
       {
-        [{ symbol: 'eth' }, ...erc20s].map(({ symbol }) => <Avatar key={symbol} src={tokenImage[symbol]} style={{ width: 30, height: 30 }} />)
+        [{ symbol: 'ETH' }, ...erc20s].map(({ symbol }) => <Avatar key={symbol} src={assetImage(symbol)} style={{ width: 30, height: 30 }} />)
       }
     </AvatarGroup>
   )

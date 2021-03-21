@@ -13,27 +13,9 @@ import {
   Divider,
 } from '@material-ui/core'
 import { useParams } from "react-router-dom"
-
-import usdcImage from 'images/usdc.png'
-import batImage from 'images/bat.png'
-import ethImage from 'images/eth.png'
-import uniImage from 'images/uni.png'
-import daiImage from 'images/dai.png'
-import ethrsiapyImage from 'images/ethrsiapy.png'
-import wbtcImage from 'images/wbtc.png'
-
 import { formatCurrency } from '../../utils/formatting'
 import { calculateAccountTotal, getTokenPrice } from '../../utils/calcs'
-
-const tokenImage = {
-  usdc: usdcImage,
-  bat: batImage,
-  eth: ethImage,
-  uni: uniImage,
-  dai: daiImage,
-  ethrsiapy: ethrsiapyImage,
-  wbtc: wbtcImage,
-}
+import { assetImage } from '../../utils/images'
 
 const AccountView = () => {
   const [{ accounts, tokens }] = useContext(Context)
@@ -43,7 +25,7 @@ const AccountView = () => {
 
   const accountTotal = calculateAccountTotal(account, tokens)
 
-  const assets = [{ symbol: 'eth', balance: account.ether }, ...account.erc20s]
+  const assets = [{ symbol: 'ETH', balance: account.ether }, ...account.erc20s]
 
   const Asset = (props) => {
     const { asset } = props
@@ -54,7 +36,7 @@ const AccountView = () => {
     return (
       <ListItem dense style={{ paddingLeft: 0, paddingRight: 0 }}>
         <ListItemAvatar>
-          <Avatar src={tokenImage[symbol]} />
+          <Avatar src={assetImage(symbol)} />
         </ListItemAvatar>
         <ListItemText primary={symbol} secondary={balance} primaryTypographyProps={{ style: { textTransform: 'uppercase' } }} />
         <ListItemSecondaryAction style={{ right: 0 }}>
@@ -79,8 +61,8 @@ const AccountView = () => {
           <List>
             {
               assets.map((asset, idx) => (
-                <React.Fragment>
-                  <Asset asset={asset} key={asset.symbol} />
+                <React.Fragment key={asset.symbol}>
+                  <Asset asset={asset} />
                   {
                     idx + 1 !== assets.length && <Divider />
                   }

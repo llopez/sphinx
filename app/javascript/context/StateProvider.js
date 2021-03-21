@@ -5,10 +5,10 @@ import rootReducer from "../reducers";
 const initialState = {
   accounts: [],
   tokens: [
-    { symbol: 'dai', value: 1.0 },
-    { symbol: 'usdc', value: 1.0 },
-    { symbol: 'bat', value: 0.23 },
-    { symbol: 'eth', value: 1800 },
+    { symbol: 'DAI', value: 1.0 },
+    { symbol: 'USDC', value: 1.0 },
+    { symbol: 'BAT', value: 0.23 },
+    { symbol: 'ETH', value: 1800 },
   ]
 }
 const STORAGE_NAME = 'sphinx-data'

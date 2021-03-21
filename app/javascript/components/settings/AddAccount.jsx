@@ -16,8 +16,8 @@ const AddAccount = () => {
     const dai = await getDaiBalance(address)
 
     const erc20s = [
-      { symbol: 'usdc', balance: parseFloat(usdc).toFixed(4) },
-      { symbol: 'dai', balance: parseFloat(dai).toFixed(4) },
+      { symbol: 'USDC', balance: parseFloat(usdc).toFixed(4) },
+      { symbol: 'DAI', balance: parseFloat(dai).toFixed(4) },
     ].filter(({ balance }) => balance > 0)
 
     dispatch(

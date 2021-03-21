@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { List, Divider } from "@material-ui/core";
 import Token from "./Token";
-import Context from '../../context/Context'
 
-const TokensList = () => {
-  const [{ tokens }] = useContext(Context)
+const TokensList = (props) => {
+  const { tokens } = props;
 
   return (
     <List>

@@ -5,5 +5,9 @@ Rails.application.routes.draw do
   get '/service-worker.js' => 'pages#service_worker'
   get '/manifest.json' => 'pages#manifest'
 
+  namespace :api do
+    get 'rates' => 'rates#index'
+  end
+
   get '*path' => 'pages#index', via: :all
 end

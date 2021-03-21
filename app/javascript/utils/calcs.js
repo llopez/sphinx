@@ -2,7 +2,7 @@ export const getTokenPrice = (symbol, rates) => rates.find(rate => rate.symbol =
 
 export const calculateAccountTotal = ({ erc20s, ether }, rates) => {
   return [
-    { symbol: 'eth', balance: ether },
+    { symbol: 'ETH', balance: ether },
     ...erc20s
   ]
     .map(({ balance, symbol }) => balance * getTokenPrice(symbol, rates))
