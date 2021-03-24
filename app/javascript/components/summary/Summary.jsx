@@ -12,11 +12,14 @@ import { assetImage } from '../../utils/images'
 import AvatarGroup from "@material-ui/lab/AvatarGroup"
 import { calculatePortfolioTotal } from '../../utils/calcs'
 import { formatCurrency } from '../../utils/formatting'
+import { useHistory } from "react-router-dom"
 
 const Summary = (props) => {
   const { accounts, tokens } = props
 
-  const erc20sTotal = accounts
+  const history = useHistory()
+
+  const erc20sTotals = accounts
     .map(({ erc20s }) => erc20s)
     .reduce((summary, aErc20s) => {
       const tot = aErc20s.reduce((x, v) => {
@@ -32,7 +35,7 @@ const Summary = (props) => {
   const erc20sList = (
     <AvatarGroup>
       {
-        Object.keys(erc20sTotal).map(symbol => <Avatar key={symbol} src={assetImage(symbol)} style={{ width: 30, height: 30 }} />)
+        Object.keys(erc20sTotals).map(symbol => <Avatar key={symbol} src={assetImage(symbol)} style={{ width: 30, height: 30 }} />)
       }
     </AvatarGroup>
   )
@@ -41,7 +44,7 @@ const Summary = (props) => {
 
   return (
     <List>
-      <ListItem button style={{ paddingLeft: 0 }}>
+      <ListItem button style={{ paddingLeft: 0 }} onClick={() => { history.push('/summary') }}>
         <ListItemText primary="Summary" secondary={erc20sList} />
         <ListItemSecondaryAction style={{ right: 0 }}>
           <div style={{ textAlign: 'right' }}><ArrowIcon viewBox="0 0 10 24" /></div>

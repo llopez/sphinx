@@ -12,7 +12,7 @@ import Context from '../context/Context'
 import AddIcon from '@material-ui/icons/Add';
 import AccountsList from './dashboard/AccountsList'
 import { useHistory } from "react-router-dom"
-import Summary from './dashboard/Summary'
+import Summary from './summary/Summary'
 
 const Dashboard = () => {
   const [{ accounts, tokens }] = useContext(Context)
@@ -34,7 +34,6 @@ const Dashboard = () => {
 
   return (
     <React.Fragment>
-
       <Card>
         <CardContent>
           <Typography>Portfolio</Typography>

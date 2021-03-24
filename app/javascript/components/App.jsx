@@ -7,6 +7,7 @@ import Market from './Market'
 import Settings from './Settings'
 import AccountView from './dashboard/AccountView'
 import AddAccount from './settings/AddAccount'
+import SummaryDetails from './summary/Details'
 
 const App = () => (
   <StateProvider>
@@ -18,6 +19,7 @@ const App = () => (
           <Route path="/settings" component={Settings} />
           <Route path="/accounts/new" component={AddAccount} />
           <Route path="/accounts/:address" component={AccountView} />
+          <Route path="/summary" component={SummaryDetails} />
         </Switch>
       </Layout>
     </Router>
