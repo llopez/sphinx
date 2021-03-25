@@ -6,21 +6,27 @@ import Context from '../../context/Context'
 const Details = () => {
   const [{ accounts }] = useContext(Context)
 
-  const erc20sTotals = accounts
+  const etherTotal = accounts.reduce((m, v) => {
+    return m + parseFloat(v.ether)
+  }, 0)
+
+  const erc20Totals = accounts
     .map(({ erc20s }) => erc20s)
     .reduce((summary, aErc20s) => {
       const tot = aErc20s.reduce((x, v) => {
-        const sum = v.balance + (summary[v.symbol] ? summary[v.symbol] : 0)
+        const sum = parseFloat(v.balance) + (summary[v.symbol] ? summary[v.symbol] : 0)
         return {
           ...x,
-          [v.symbol]: parseFloat(sum).toFixed(2)
+          [v.symbol]: sum
         };
       }, {});
 
       return { ...summary, ...tot };
     }, {});
 
-  const assets = Object.keys(erc20sTotals)
+  const assetTotals = { ETH: etherTotal, ...erc20Totals }
+
+  const assets = Object.keys(assetTotals)
 
   return (
     <Card style={{ marginTop: '0.5em' }}>
@@ -31,7 +37,7 @@ const Details = () => {
           {
             assets.map((symbol, idx) => (
               <React.Fragment key={symbol}>
-                <Asset symbol={symbol} balance={erc20sTotals[symbol]} />
+                <Asset symbol={symbol} balance={assetTotals[symbol]} />
                 {
                   idx + 1 !== assets.length && <Divider />
                 }

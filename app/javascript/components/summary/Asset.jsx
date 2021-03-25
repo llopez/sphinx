@@ -8,6 +8,7 @@ import {
   Avatar,
 } from "@material-ui/core";
 import { assetImage } from '../../utils/images'
+import { formatNumber } from '../../utils/formatting'
 
 const Asset = (props) => {
   const { symbol, balance } = props
@@ -19,7 +20,7 @@ const Asset = (props) => {
       </ListItemAvatar>
       <ListItemText primary={symbol} />
       <ListItemSecondaryAction style={{ right: 0 }}>
-        <Typography component="div">{balance}</Typography>
+        <Typography component="div">{formatNumber(balance)}</Typography>
       </ListItemSecondaryAction>
     </ListItem>
   );

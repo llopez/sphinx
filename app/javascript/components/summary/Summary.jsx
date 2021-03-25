@@ -19,23 +19,25 @@ const Summary = (props) => {
 
   const history = useHistory()
 
-  const erc20sTotals = accounts
+  const assets = accounts
     .map(({ erc20s }) => erc20s)
-    .reduce((summary, aErc20s) => {
-      const tot = aErc20s.reduce((x, v) => {
-        return {
-          ...x,
-          [v.symbol]: v.balance + (summary[v.symbol] ? summary[v.symbol] : 0)
-        };
-      }, {});
+    .reduce((result, aErc20s) => {
+      const symbols = aErc20s.map(({ symbol }) => symbol);
 
-      return { ...summary, ...tot };
-    }, {});
+      return [...result, ...symbols];
+    }, [])
+    .reduce((m, v) => {
+      if (m.includes(v)) {
+        return m;
+      } else {
+        return [...m, v];
+      }
+    }, []);
 
   const erc20sList = (
     <AvatarGroup>
       {
-        Object.keys(erc20sTotals).map(symbol => <Avatar key={symbol} src={assetImage(symbol)} style={{ width: 30, height: 30 }} />)
+        ['ETH', ...assets].map(symbol => <Avatar key={symbol} src={assetImage(symbol)} style={{ width: 30, height: 30 }} />)
       }
     </AvatarGroup>
   )
